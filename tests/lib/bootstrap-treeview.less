@@ -2,57 +2,101 @@
 
 .treeview {
 
-	.list-group {
+    .list-group {
 
-		.list-group-item {
+        .list-group-item {
 
-			background: @item-background;
-			border-radius: 0;
-			cursor: pointer;
+            background: @item-background;
+            border-radius: 0;
+            cursor: pointer;
+            margin: 0;
+            padding: 4px 0;
 
-			.icon {
-				color: @icon-color;
-				display: inline-block;
-				margin-right: @icon-space;
-				text-align: center;
-				width: @icon-width;
-			}
-			.indent {
-				display: inline-block;
-				margin-left: @icon-space;
-				width: @icon-width;
-			}
-			a {
-				color: @text-color;
-				text-decoration: none;
-			}
+            .icon {
+                color: @icon-color;
+                display: block;
+                float: left;
+                font-size: @icon-size;
+                margin-left: @icon-space;
+                margin-right: @icon-space;
+                text-align: center;
+                width: @icon-width;
 
-			.badge {
-				background: @tag-background;
-				color: @tag-color;
-			}
+                height: 20px;
+                line-height: 20px;
+                margin-top: -10px;
+                position: absolute;
+                top: 50%;
+                i {
+                    font-weight: 200;
+                }
+            }
+            .indent {
+                display: block;
+                float: left;
+                margin-left: @icon-space;
+                min-height: 1px;
+                width: @icon-width;
+            }
+            a {
+                color: @text-color;
+                display: block;
+                margin-left: @icon-width + @icon-space;
+                padding-left: 0;
+                text-decoration: none;
+            }
+            // link spacer
+            .indent + a { margin-left: 2 * (@icon-width + @icon-space); }
+            .indent + .indent + a { margin-left: 3 * (@icon-width + @icon-space); }
+            .indent + .indent + .indent + a { margin-left: 4 * (@icon-width + @icon-space); }
+            .indent + .indent + .indent + .indent + a { margin-left: 5 * (@icon-width + @icon-space); }
 
-			&:hover {
-				background: @item-background-hover;
-				a {
-					color: @text-color-hover;
-				}
+            .badge {
+                background: @tag-background;
+                color: @tag-color;
+            }
 
-			}
+            &:hover {
+                background: @item-background-hover;
+                a {
+                    color: @text-color-hover;
+                }
 
-			&.active {
-				background: @item-background-active;
-				a {
-					color: @text-color-active;
-				}
-			}
+            }
 
-			&.open {
-				.icon {
-					color: @icon-color-open;
-				}
-			}
-		}
-	}
+            &.active {
+                background: @item-background-active;
+                a {
+                    color: @text-color-active;
+                }
+            }
+
+            &.open {
+                .icon {
+                    color: @icon-color-open;
+                }
+            }
+            // position arrow
+            &.node-level-2 {
+                .icon {
+                    left: @icon-width + @icon-space;
+                }
+            }
+            &.node-level-3 {
+                .icon {
+                    left: 2 * (@icon-width + @icon-space);
+                }
+            }
+            &.node-level-4 {
+                .icon {
+                    left: 3 * (@icon-width + @icon-space);
+                }
+            }
+            &.node-level-5 {
+                .icon {
+                    left: 4 * (@icon-width + @icon-space);
+                }
+            }
+        }
+    }
 }
-

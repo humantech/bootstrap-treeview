@@ -186,9 +186,15 @@
 			level += 1
 
 			var self = this
+
+			var url = self._getHrefActive()
+
 			$.each(nodes, function addNodes(id, node) {
 
-				if (level >= self.options.levels && (!self.options.expandActiveTree || !self._findNodeByHref(node))) {
+				var active = node.href == url
+				var child_active = self._findNodeByHref(node)
+
+				if (level >= self.options.levels && (!self.options.expandActiveTree || (!active && !child_active))) {
 					self._toggleNodes(node)
 				}
 
@@ -252,11 +258,6 @@
 					.attr('data-nodeid', node.nodeId)
 					.addClass(self._buildClassOverride(node))
 
-				var indent_limit = (node.nodes || node._nodes) ? level - 1 : level
-				for (var i = 0; i < indent_limit; i++) {
-					treeItem.append(self._template.indent)
-				}
-
 				if (node._nodes) {
 
 					treeItem
@@ -275,13 +276,8 @@
 
 				}
 
-				if (self.options.enableLinks) {
-					treeItem
-						.append($(self._template.link)
-							.attr('href', node.href)
-							.append(node.text))
-				} else {
-					treeItem.append(node.text)
+				for (var i = 0; i < level - 1; i++) {
+					treeItem.append(self._template.indent)
 				}
 
 				if (self.options.showTags && node.tags) {
@@ -290,6 +286,15 @@
 							.append($(self._template.badge)
 								.append(tag))
 					})
+				}
+
+				if (self.options.enableLinks) {
+					treeItem
+						.append($(self._template.link)
+							.attr('href', node.href)
+							.append(node.text))
+				} else {
+					treeItem.append(node.text)
 				}
 
 				self.$wrapper.append(treeItem)
@@ -324,7 +329,7 @@
 			list: '<ul class="list-group"></ul>',
 			item: '<li class="list-group-item"></li>',
 			indent: '<span class="indent"></span>',
-			iconWrapper: '<span class="icon"></span>',
+			iconWrapper: '<div class="icon"><span></span></div>',
 			icon: '<i></i>',
 			link: '<a href="#"></a>',
 			badge: '<span class="badge"></span>'
