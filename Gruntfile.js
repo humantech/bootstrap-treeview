@@ -12,14 +12,16 @@ module.exports = function(grunt) {
       }
     },
 
-    cssmin: {
-      minify: {
-        expand: true,
-        cwd: 'src/css',
-        src: ['*.css', '!*.min.css'],
-        dest: 'dist',
-        ext: '.min.css'
-      }
+    less: {
+        options: {
+            cleancss: true,
+            compile: true
+        },
+        core: {
+            files: {
+                "dist/bootstrap-treeview.min.css": "src/less/bootstrap-treeview.less"
+            }
+        }
     },
 
     qunit: {
@@ -36,14 +38,8 @@ module.exports = function(grunt) {
         files: [
           // copy dist to tests
           // { expand: true, cwd: 'dist', src: '*', dest: 'tests/lib/' },
-          { expand: true, cwd: 'src/css', src: '*', dest: 'tests/lib/' },
+          { expand: true, cwd: 'src/less', src: '*', dest: 'tests/lib/' },
           { expand: true, cwd: 'src/js', src: '*', dest: 'tests/lib/' },
-          // copy latest libs to tests
-          { expand: true, cwd: 'public/bower_components/jquery', src: 'jquery.js', dest: 'tests/lib/' },
-          { expand: true, cwd: 'public/bower_components/bootstrap-datepicker/js', src: 'bootstrap-datepicker.js', dest: 'tests/lib/' },
-          // copy src to example
-          { expand: true, cwd: 'src/css', src: '*', dest: 'public/css/' },
-          { expand: true, cwd: 'src/js', src: '*', dest: 'public/js/' }
         ]
       }
     }
@@ -55,8 +51,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   // register one or more task lists (you should ALWAYS have a "default" task list)
-  grunt.registerTask('default', ['uglify', 'copy', 'qunit']);
-  grunt.registerTask('build', ['uglify', 'cssmin', 'copy', 'qunit']);
+  grunt.registerTask('default', ['uglify', 'less', 'copy', 'qunit']);
+  grunt.registerTask('build', ['uglify', 'less', 'copy', 'qunit']);
 };

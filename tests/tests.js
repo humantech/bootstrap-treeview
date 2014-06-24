@@ -87,39 +87,19 @@
 		var el = init(),
 			options = getOptions(el);
 		ok(options, 'Defaults created ok');
-		equal(options.levels, 2, 'levels defaults ok');
-		equal(options.expandIcon, 'glyphicon glyphicon-plus', 'expandIcon defaults ok');
-		equal(options.collapseIcon, 'glyphicon glyphicon-minus', 'collapseIcon defaults ok');
-		equal(options.nodeIcon, 'glyphicon glyphicon-stop', 'nodeIcon defaults ok');
-		equal(options.color, undefined, 'color defaults ok');
-		equal(options.backColor, undefined, 'backColor defaults ok');
-		equal(options.borderColor, undefined, 'borderColor defaults ok');
-		equal(options.onhoverColor, '#F5F5F5', 'onhoverColor defaults ok');
-		equal(options.selectedColor, '#FFFFFF', 'selectedColor defaults ok');
-		equal(options.selectedBackColor, '#428bca', 'selectedBackColor defaults ok');
+		equal(options.levels, 1, 'levels defaults ok');
+		equal(options.expandIcon, 'glyphicon glyphicon-chevron-right', 'expandIcon defaults ok');
+		equal(options.collapseIcon, 'glyphicon glyphicon-chevron-down', 'collapseIcon defaults ok');
 		equal(options.enableLinks, false, 'enableLinks defaults ok');
-		equal(options.highlightSelected, true, 'highlightSelected defaults ok');
-		equal(options.showBorder, true, 'showBorder defaults ok');
 		equal(options.showTags, false, 'showTags defatuls ok');
-		equal(options.onNodeSelected, null, 'onNodeSelected default ok');
 
 		// Then test user options are correctly set
 		var opts = {
 			levels: 99,
 			expandIcon: 'glyphicon glyphicon-expand',
 			collapseIcon: 'glyphicon glyphicon-collapse',
-			nodeIcon: 'glyphicon glyphicon-node',
-			color: 'yellow',
-			backColor: 'purple',
-			borderColor: 'purple',
-			onhoverColor: 'orange',
-			selectedColor: 'yellow',
-			selectedBackColor: 'darkorange',
 			enableLinks: true,
-			highlightSelected: false,
-			showBorder: false,
-			showTags: true,
-			onNodeSelected: function () {}
+			showTags: true
 		};
 
 		options = getOptions(init(opts));
@@ -127,18 +107,8 @@
 		equal(options.levels, 99, 'levels set ok');
 		equal(options.expandIcon, 'glyphicon glyphicon-expand', 'expandIcon set ok');
 		equal(options.collapseIcon, 'glyphicon glyphicon-collapse', 'collapseIcon set ok');
-		equal(options.nodeIcon, 'glyphicon glyphicon-node', 'nodeIcon set ok');
-		equal(options.color, 'yellow', 'color set ok');
-		equal(options.backColor, 'purple', 'backColor set ok');
-		equal(options.borderColor, 'purple', 'borderColor set ok');
-		equal(options.onhoverColor, 'orange', 'onhoverColor set ok');
-		equal(options.selectedColor, 'yellow', 'selectedColor set ok');
-		equal(options.selectedBackColor, 'darkorange', 'selectedBackColor set ok');
 		equal(options.enableLinks, true, 'enableLinks set ok');
-		equal(options.highlightSelected, false, 'highlightSelected set ok');
-		equal(options.showBorder, false, 'showBorder set ok');
 		equal(options.showTags, true, 'showTags set ok');
-		equal(typeof options.onNodeSelected, 'function', 'onNodeSelected set ok');
 	});
 
 	test('Links enabled', function () {
@@ -215,7 +185,6 @@
 		el = $('.list-group-item:first');
 		ok((el.attr('class').split(' ').indexOf('node-selected') !== -1), 'Node is correctly selected : class "node-selected" added');
 		ok(($('.node-selected').length === 1), 'There is only one selected node');
-		ok(cbWorked, 'onNodeSelected function was calledted');
 		ok(onWorked, 'nodeSelected was fired');
 	});
 

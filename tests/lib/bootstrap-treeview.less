@@ -1,0 +1,58 @@
+@import 'variables.less';
+
+.treeview {
+
+	.list-group {
+
+		.list-group-item {
+
+			background: @item-background;
+			border-radius: 0;
+			cursor: pointer;
+
+			.icon {
+				color: @icon-color;
+				display: inline-block;
+				margin-right: @icon-space;
+				text-align: center;
+				width: @icon-width;
+			}
+			.indent {
+				display: inline-block;
+				margin-left: @icon-space;
+				width: @icon-width;
+			}
+			a {
+				color: @text-color;
+				text-decoration: none;
+			}
+
+			.badge {
+				background: @tag-background;
+				color: @tag-color;
+			}
+
+			&:hover {
+				background: @item-background-hover;
+				a {
+					color: @text-color-hover;
+				}
+
+			}
+
+			&.active {
+				background: @item-background-active;
+				a {
+					color: @text-color-active;
+				}
+			}
+
+			&.open {
+				.icon {
+					color: @icon-color-open;
+				}
+			}
+		}
+	}
+}
+
